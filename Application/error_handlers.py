@@ -1,7 +1,5 @@
 from werkzeug import exceptions
 from typing import cast
-from flask import redirect, url_for, request
-import requests
 
 def jsonify_default_errors(e: exceptions.HTTPException) -> tuple[dict, int]:
         code: int

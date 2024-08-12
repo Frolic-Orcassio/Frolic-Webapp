@@ -2,7 +2,6 @@ import time
 from flask import Blueprint, redirect, render_template, url_for
 from Application import htmx_required
 from werkzeug import exceptions
-import requests
 
 bp = Blueprint('Admin', 
                __name__, 
@@ -12,8 +11,7 @@ bp = Blueprint('Admin',
 
 @bp.get('/all-users')
 def index():
-    res = requests.get('https://uniteup.netlify.app/')
-    # return render_template('admin/index.html')
+    return render_template('admin/index.html')
 
 @bp.get('/ajax/all-users')
 def ajax_users():

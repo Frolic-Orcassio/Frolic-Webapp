@@ -68,18 +68,7 @@
                         }
                     ]
                 }
-            },
-            columnDefs: [
-                {
-                    target: 4,
-                    render: function(data, type, row) {
-                        if(data==='yes'){
-                            return '<i class="bi bi-check-circle-fill text-success"></i>'
-                        }
-                        return '<i class="bi bi-x-circle-fill text-danger"></i>'
-                    }
-                }
-            ]
+            }
         })
     }
     document.addEventListener('DOMContentLoaded', function () {

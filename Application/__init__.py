@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from enum import StrEnum, auto
 from flask_htmx import HTMX
 from functools import wraps
-from werkzeug import exceptions
 
 class Base(MappedAsDataclass, DeclarativeBase):
     pass
@@ -17,12 +16,12 @@ def create_app(config: IApplicationConfiguration, /) -> Flask:
     app: Flask = Flask(__name__, instance_relative_config=True)
     app.config.from_object(config)
 
-    import Application.error_handlers as errhndl
-    app.register_error_handler(exceptions.HTTPException, errhndl.jsonify_default_errors)
-    app.register_error_handler(exceptions.NotFound, errhndl.handle_notfound_errors)
+    # import Application.error_handlers as errhndl
+    # app.register_error_handler(exceptions.HTTPException, errhndl.jsonify_default_errors)
+    # app.register_error_handler(exceptions.NotFound, errhndl.handle_notfound_errors)
 
     from Application.blueprints import admin
-    app.register_blueprint(admin.bp) 
+    app.register_blueprint(admin.bp)
 
     htmx.init_app(app)
 
