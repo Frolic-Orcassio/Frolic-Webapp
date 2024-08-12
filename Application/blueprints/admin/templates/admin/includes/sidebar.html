@@ -1,0 +1,64 @@
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul hx-boost="true" hx-target="#main" hx-swap="innerHTML" class="sidebar-nav" id="sidebar-nav">
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ url_for('Admin.events') }}">
+                <i class="bx bxs-calendar-star fs-4"></i>
+                <span>Events</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <hr>
+
+        <li class="nav-heading">Users</li>
+
+        <li hx-boost="false" class="nav-item">
+            <a class="nav-link" href="{{ url_for('Admin.index') }}">
+                <i class="bi bi-people-fill fs-4"></i>
+                <span>All Users</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="">
+                <i class="bi bi-building-fill fs-4"></i>
+                <span>Departmental Heads</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="">
+                <i class="bi bi-person-badge-fill fs-4"></i>
+                <span>Organizers</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="">
+                <i class="bi bi-person-bounding-box fs-4"></i>
+                <span>Co-ordinators</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="">
+                <i class="bi bi-person-vcard-fill fs-4"></i>
+                <span>Participants</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <hr>
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="">
+                <i class="bi bi-person-circle fs-4"></i>
+                <span>Profile</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+    </ul>
+
+</aside><!-- End Sidebar-->

@@ -1,0 +1,25 @@
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="{{ url_for('Admin.index') }}" class="logo d-flex align-items-center">
+            <img src="img/darshan-frolic.png" alt="">
+            <span class="d-none d-lg-block fs-4">Frolic 2024</span>
+        </a>
+        <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
+    </div><!-- End Logo -->
+
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item pe-3" data-bs-toggle="tooltip" title="go to hell">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="{{ url_for('Admin.index') }}#">
+                    <img src="img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                </a><!-- End Profile Iamge Icon -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->

@@ -1,6 +1,7 @@
 from werkzeug import exceptions
 from typing import cast
-from flask import redirect, url_for
+from flask import redirect, url_for, request
+import requests
 
 def jsonify_default_errors(e: exceptions.HTTPException) -> tuple[dict, int]:
         code: int
@@ -21,5 +22,6 @@ def jsonify_default_errors(e: exceptions.HTTPException) -> tuple[dict, int]:
         data = dict(description=description)
         return data, code
 
-def handle_notfound_errors(e: exceptions.NotFound):
-    return redirect(url_for('home'))
+# def handle_notfound_errors(e: exceptions.NotFound):
+#     res = requests.get('https://smit1199.pythonanywhere.com'+request.path)
+#     return res.text

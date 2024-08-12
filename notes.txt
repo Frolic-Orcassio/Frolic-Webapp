@@ -1,0 +1,7 @@
+- adding reload button in data table
+- we can use the red "DU" logo which is at /home/soham/Creatives/Icons/darshan.svg as header logo in admin panel and favicon
+- start with events in sidebar, than users and profile in last add hr on top of users and on bottom of users, main page should be events
+- setting red as primary color and on hover effects if there is time left
+- adding spinner in reload button
+- designing modal when user clicks on a row
+- Adding fake data in database for all models and creating all models

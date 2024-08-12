@@ -1,0 +1,104 @@
+<section class="section dashboard">
+    <table id="users" class="table datatable table-hover">
+        <thead>
+            <tr>
+                <th>Profile-picture</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Authenticated</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</section>
+
+<script>
+    let table;
+    function initializeUsers() {
+        table = new DataTable('#users', {
+            ajax: '{{ url_for("Admin.ajax_users") }}',
+            paging: false,
+            destroy: true,
+            ordering: false,
+            scrollX: true,
+            scrollY: '67vh',
+            layout: {
+                topStart: {
+                    features: [
+                        {
+                            search: {
+                                placeholder: "type here..."
+                            }
+                        },
+                        function () {
+                            return $('<button>', {
+                                class: 'btn btn-light border-secondary-subtle',
+                                'data-bs-toogle': 'tooltip',
+                                title: 'reload',
+                                onclick: 'initializeUsers()'
+                            }).html('<i class="bi bi-arrow-clockwise"></i>')
+                        }
+
+                    ]
+                },
+                topEnd: {
+                    buttons: [
+                        {
+                            extend: 'csv',
+                            text: '<i class="bi bi-table"></i>',
+                            title: 'All Users Data in Frolic',
+                            exportOptions: {
+                                columns: function (index, data, node) {
+                                    return index !== 0;
+                                }
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                            title: 'All Users Data in Frolic',
+                            exportOptions: {
+                                columns: function (index, data, node) {
+                                    return index !== 0;
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            columnDefs: [
+                {
+                    target: 4,
+                    render: function(data, type, row) {
+                        if(data==='yes'){
+                            return '<i class="bi bi-check-circle-fill text-success"></i>'
+                        }
+                        return '<i class="bi bi-x-circle-fill text-danger"></i>'
+                    }
+                }
+            ]
+        })
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        DataTable.Buttons.defaults.dom.button.className = 'btn btn-light border-secondary-subtle';
+        initializeUsers()
+        $('#users tbody').on('click', 'tr', function () {
+            let rowData = table.row(this).data();
+            console.log(rowData);
+        });
+
+        $('#users_wrapper .buttons-csv').attr({
+            'data-bs-toogle': 'tooltip',
+            'data-bs-placement': 'bottom',
+            title: 'export to csv'
+        })
+        $('#users_wrapper .buttons-pdf').attr({
+            'data-bs-toogle': 'tooltip',
+            'data-bs-placement': 'bottom',
+            title: 'export to pdf'
+        })
+    });
+</script>

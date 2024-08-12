@@ -1,0 +1,139 @@
+.aa{
+    word-wrap: break-word;
+}
+.article-container {
+    width: 100% !important;
+}
+
+/* Media query for screens smaller than 768px (standard tablets and phones) */
+@media (max-width: 768px) {
+  .card-body {
+      flex-direction: column !important;
+      align-items: center;
+  }
+
+  .profile-img {
+      margin-top: 0; /* Adjust margin */
+      margin-bottom: 20px; /* Add margin to separate profile picture and form */
+      width: 200px; /* Adjust width */
+      height: 200px; /* Adjust height */
+  }
+
+  .card-body .form-group {
+      width: 100%; /* Adjust width to fill the container */
+  }
+
+  .btn-primary {
+      width: 100%; /* Adjust button width */
+  }
+}
+
+/* Media query for screens smaller than 576px (standard phones) */
+@media (max-width: 576px) {
+  .profile-img {
+      width: 150px; /* Adjust width */
+      height: 150px; /* Adjust height */
+  }
+
+  /* You can add further adjustments for smaller screens if needed */
+}
+
+@media (max-width: 576px) {
+  .dropdown-menu {
+    min-width: 100%; /* Set the minimum width to 100% of the viewport */
+    right: 0; /* Align the dropdown menu to the right side */
+  }
+}
+
+
+
+/* Add this to your main.css file */
+/* 
+@media screen and (max-width: 175px) {
+    /* Add responsive styles here */
+    /* For example, you can make the navbar collapse earlier 
+    .navbar-collapse {
+      flex-basis: 100%;
+      justify-content: center;
+    }
+  
+    .navbar-nav {
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .navbar-nav .nav-item {
+      margin: 5px 0;
+    }
+  
+    .navbar-nav .nav-item:last-child {
+      margin-bottom: 20px;
+    }
+  
+    .navbar-nav .nav-link {
+      padding: .5rem 0;
+    }
+  } */
+
+  .post-container {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .post-actions {
+    float: right;
+  }
+  
+  .post-actions .btn {
+    margin-left: 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 10px;
+  }
+  
+  .post-user {
+    display: flex;
+    align-items: center;
+  }
+  
+  .post-user-img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .post-user-info {
+    font-size: 18px;
+  }
+  
+  .post-username {
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .post-email {
+    text-decoration: none;
+    color: #777;
+  }
+  
+  .article-metadata {
+    float: right;
+  }
+  
+  .article-title {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .article-content {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  
