@@ -1,0 +1,40 @@
+<section class="section dashboard">
+
+
+  <div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-2 gy-3">
+
+      <div class="col">
+        <label for="title" class="form-label fw-bolder">Title:</label>
+        <input type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="give appropriate event title...">
+        <div id="titleHelp" class="form-text">The title must be within 32 characters.</div>
+      </div>
+
+      <div class="col">
+        <label for="program" class="form-label fw-bolder">Select program:</label>
+        <select id="program" class="form-select" aria-label="Select program">
+          <option value="1">BCA</option>
+          <option value="2">CSE</option>
+          <option value="3">MBA</option>
+          <option value="4">General</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label for="description" class="form-label fw-bolder">Brief Description:</label>
+        <textarea class="form-control" id="description" rows="3" placeholder="describe the event in brief..." aria-describedby="descriptionHelp"></textarea>
+        <div id="descriptionHelp" class="form-text">The description must be within 128 characters.</div>
+      </div>
+
+      <div class="col">
+        <label for="thumbnail" class="form-label fw-bolder">Upload Thumbnail:</label>
+        <input class="form-control" type="file" id="thumbnail" aria-describedby="thumbnailHelp">
+        <div id="thumbnailHelp" class="form-text">The file must have one of these extensions: jpg, jpe, jpeg, png, gif, svg, bmp, webp. The file-size must be within 5MB. The File should have aspect-ratio around 16x9 for better display.</div>  
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div id="editor" style="height: 80vh;"></div>
+</section>

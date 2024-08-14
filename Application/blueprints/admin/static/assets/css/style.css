@@ -619,6 +619,7 @@ h6 {
   }
 }
 
+
 .sidebar::-webkit-scrollbar {
   width: 5px;
   height: 8px;
@@ -1230,4 +1231,26 @@ h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+/*--------------------------------------------------------------
+# Custom css
+--------------------------------------------------------------*/
+tbody tr {
+  cursor: pointer;
+}
+
+/* .truncate-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+} */
+
+.card-container .card:hover {
+  background: rgb(241, 241, 241);
+  cursor: pointer;
 }

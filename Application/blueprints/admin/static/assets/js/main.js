@@ -258,6 +258,20 @@
     })
   })
 
+
+  document.addEventListener('createEditor', function () {
+    new Quill('#editor', {
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, false] }],
+          ['bold', 'italic', 'underline'],
+          ['image', { 'list': 'ordered'}, { 'list': 'bullet' }, { 'align': [] }, 'link'],
+        ],
+      },
+      placeholder: 'Start designing event page here...',
+      theme: 'snow', // or 'bubble'
+    });
+  })
   /**
    * END MAIN JS
   */

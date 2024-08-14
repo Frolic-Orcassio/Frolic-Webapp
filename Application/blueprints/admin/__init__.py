@@ -21,7 +21,14 @@ def ajax_users():
                     ]}
 
 @bp.get('/events')
+@htmx_required(redirect_endpoint='Admin.index')
 def events():
     return render_template('admin/main/events.html')
+
+
+@bp.get('/create-event')
+@htmx_required(redirect_endpoint='Admin.index')
+def create_event():
+    return render_template('admin/main/create-event.html'), {"HX-Trigger-After-Settle":"createEditor"}
 
 bp.add_url_rule('/', endpoint='root', view_func=lambda: redirect(url_for('Admin.index')))
