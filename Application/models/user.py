@@ -6,12 +6,13 @@ from typing import Optional
 class User(db.Model): # type: ignore
     email: Mapped[str] = mapped_column(String(320), primary_key=True, init=True)
     name: Mapped[str] = mapped_column(String(64), nullable=False, init=True)
-    dp: Mapped[str] = mapped_column(String(64), nullable=True, init=False)
-    role: Mapped[str] = mapped_column(String(16), nullable=False, init=False, default=Role.PARTICIPANT)
     is_authenticated: Mapped[bool] = mapped_column(nullable=False, init=True)
+    dp: Mapped[Optional[str]] = mapped_column(String(64), nullable=True, init=True, default=None)
+    role: Mapped[str] = mapped_column(String(16), nullable=False, init=True, default=Role.PARTICIPANT)
 
     branch_admin: Mapped[Optional["BranchAdmin"]] = relationship(back_populates='user', uselist=False, init=False, repr=False) # type: ignore
     coordinator: Mapped[Optional["Coordinator"]] = relationship(back_populates='user', uselist=False, init=False, repr=False) # type: ignore
+    participant: Mapped[Optional["Participant"]] = relationship(back_populates='user', uselist=False, init=False, repr=False) # type: ignore
 
 
     @validates('role')

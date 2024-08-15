@@ -7,4 +7,6 @@
 - adding a button to turn on/off registrations for perticular events
 - fixing top arrow
 
-Heading upto 2 levels, unordered and ordered list, bold, italic, image, paragraph, text alignment, table
+Heading upto 2 levels, unordered and ordered list, bold, italic, image, paragraph, text alignment
+
+using bootstrap tabs as sidebar navs instead of using htmx
