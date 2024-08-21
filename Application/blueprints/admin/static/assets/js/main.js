@@ -272,6 +272,15 @@
       theme: 'snow', // or 'bubble'
     });
   })
+
+
+  document.addEventListener('userDeleted', function() {
+    document.querySelectorAll('.modal').forEach(element => {
+      bootstrap.Modal.getOrCreateInstance(element).hide()
+    });
+    document.getElementById('usersReload').click()
+  })
+
   /**
    * END MAIN JS
   */

@@ -9,7 +9,7 @@
                 <th>Authenticated</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="align-middle">
 
         </tbody>
     </table>
@@ -38,7 +38,8 @@
                                 class: 'btn btn-light border-secondary-subtle',
                                 'data-bs-toogle': 'tooltip',
                                 title: 'reload',
-                                onclick: 'initializeUsers()'
+                                onclick: 'initializeUsers()',
+                                id: 'usersReload'
                             }).html('<i class="bi bi-arrow-clockwise"></i>')
                         }
 
@@ -68,7 +69,15 @@
                         }
                     ]
                 }
-            }
+            },
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function (data, type, row) {
+                        return `<img src='{{ url_for("Admin.static", filename="profiles") }}/${data}'' alt="Image" class="rounded-circle" style="max-width:50px;max-height:50px;">`;
+                    }
+                }
+            ]
         })
     }
     document.addEventListener('DOMContentLoaded', function () {
@@ -76,7 +85,27 @@
         initializeUsers()
         $('#users tbody').on('click', 'tr', function () {
             let rowData = table.row(this).data();
-            console.log(rowData);
+            static_path = '{{ url_for("Admin.static", filename="profiles") }}'
+            let modalElement = document.getElementById('userModal')
+
+            modalElement.querySelector('#userModalProfilePicture').innerHTML = `<img src="${static_path}/${rowData[0]}" alt="Image">`
+            modalElement.querySelector('#userModalName').innerHTML = rowData[1]
+            modalElement.querySelector('#userModalEmail').innerHTML = rowData[2]
+            modalElement.querySelector('#userModalAuthenticated').innerHTML = rowData[4]
+            selectElement = modalElement.querySelector('#userModalRole')
+            for (let i = 0; i < selectElement.options.length; i++) {
+                const option = selectElement.options[i];
+                if (option.value === rowData[3]) {
+                    selectElement.selectedIndex = i;
+                    break
+                }
+            }
+            document.getElementById('DeleteButton').setAttribute('hx-delete', `{{ url_for("Admin.delete_user") }}?email=${rowData[2]}`)
+            document.getElementById('user').innerHTML = rowData[2]
+            modalElement.querySelector('#EditButton').setAttribute('hx-patch', `{{ url_for("Admin.update_user") }}?email=${rowData[2]}`)
+            htmx.process(modalElement.querySelector('.modal-footer'))
+            htmx.process(document.getElementById('consentModal').querySelector('.modal-footer'))
+            bootstrap.Modal.getOrCreateInstance(modalElement).show()
         });
 
         $('#users_wrapper .buttons-csv').attr({
@@ -91,3 +120,83 @@
         })
     });
 </script>
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-lg modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bolder" id="userModalLabel">User Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column flex-lg-row">
+                <div id="userModalProfilePicture" class="m-3">
+
+                </div>
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-md-2 gx-0">
+                        <span class="col fw-bolder">Name:</span>
+                        <span id="userModalName" class="col mb-3"></span>
+
+                        <span class="col fw-bolder">Email:</span>
+                        <span id="userModalEmail" class="col mb-3"></span>
+
+                        <div class="col fw-bolder">Role: </div>
+                        <select id="userModalRole" class="col form-select mb-3" style="width:auto;">
+                            {% for role in Role %}
+                            <option value="{{ role }}">{{ role|title }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <span class="col fw-bolder">Authenticated:</span>
+                        <span id="userModalAuthenticated" class="col"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between justify-content-lg-end">
+
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#consentModal">Delete User</button>
+
+                <button id="EditButton" type="button" class="btn btn-primary" hx-disabled-elt="this" hx-indicator="#EditIndicator" hx-vals="js:{role: document.getElementById('userModalRole').value}">
+                    <div id="EditIndicator">
+                        <span class="hide-when-requesting">Save Changes</span>
+                        <div class="htmx-indicator">
+                            <span class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </span>
+                        </div>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="consentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-lg modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-body d-flex flex-column flex-lg-row">
+                <span>Are you sure you want to delete the user with email <span id="user"></span> ?</span>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-between justify-content-lg-end">
+
+                <button id="DeleteButton" type="button" class="btn btn-danger" hx-disabled-elt="this" hx-indicator="#DeleteIndicator">
+                    <div id="DeleteIndicator">
+                        <span class="hide-when-requesting">Yes, Delete!</span>
+                        <div class="htmx-indicator">
+                            <span class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </span>
+                        </div>
+                    </div>
+                </button>
+
+                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#userModal">Go Back</button>
+
+            </div>
+        </div>
+    </div>
+</div>

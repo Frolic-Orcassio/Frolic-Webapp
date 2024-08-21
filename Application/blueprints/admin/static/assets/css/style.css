@@ -1240,17 +1240,25 @@ tbody tr {
   cursor: pointer;
 }
 
-/* .truncate-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-} */
-
 .card-container .card:hover {
   background: rgb(241, 241, 241);
   cursor: pointer;
+}
+
+
+.htmx-indicator {
+  display: none;
+}
+
+.htmx-request .htmx-indicator {
+  display: block;
+}
+
+
+.hide-when-requesting {
+  display: block;
+}
+
+.htmx-request .hide-when-requesting {
+  display: none;
 }

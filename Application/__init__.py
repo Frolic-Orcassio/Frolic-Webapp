@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, g, redirect, render_template, request, url_for
 from instance import IApplicationConfiguration
 from sqlalchemy.orm import MappedAsDataclass, DeclarativeBase
 from flask_sqlalchemy import SQLAlchemy
@@ -26,9 +26,12 @@ def create_app(config: IApplicationConfiguration, /) -> Flask:
     htmx.init_app(app)
 
     db.init_app(app)
-    from Application.models.user import User
+    from Application.models import User, Event, EventWiseOrganizers, Participant, BranchAdmin, Coordinator, Team, TeamWiseMembers
     with app.app_context():
         db.create_all()
+        if app.debug == True:
+            from instance.populate_database import populate_db
+            populate_db(db)
 
     @app.get('/')
     def home():
@@ -53,11 +56,28 @@ class Branch(StrEnum):
 
 
 def htmx_required(*, redirect_endpoint: str):
+    """checks if the reqest is made by htmx, if test fails then redirects to given url"""
     def decorator(view):
         @wraps(view)
         def wrapped_view(**kwargs):
             if not htmx:
                 return redirect(url_for(redirect_endpoint))
             return view(**kwargs)
+        return wrapped_view
+    return decorator
+
+def load_requested_user(*, redirect_endpoint: str):
+    """get email from args and query the user with that email from database, if email or user is None then redirect to given url"""
+    def decorator(view):
+        @wraps(view)
+        def wrapped_view(**kwargs):
+            email = request.args.get('email')
+            if email:
+                from Application.models import User
+                user = User.query.get(email)
+                if user:
+                    g.user = user
+                    return view(**kwargs)
+            return redirect(url_for(redirect_endpoint))
         return wrapped_view
     return decorator

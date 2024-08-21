@@ -10,3 +10,9 @@
 Heading upto 2 levels, unordered and ordered list, bold, italic, image, paragraph, text alignment
 
 using bootstrap tabs as sidebar navs instead of using htmx
+
+a modal opens showing all information of the users table row and can edit role or delete account
+
+if g.user is none then raise the error and handle that at error handlers
+
+generalize the "userDeleted" js event

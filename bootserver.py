@@ -15,6 +15,17 @@ if os.path.isdir(directory):
 else:
     print(f"The directory '{directory}' does not exist.")
 
+
+directory = './Application/blueprints/admin/static/profiles'
+if os.path.isdir(directory):
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename) 
+        os.remove(file_path)
+        print(f'Deleted: {file_path}')
+else:
+    print(f"The directory '{directory}' does not exist.")
+
+
 wsgiapp = create_app(Deployment())
 
 if __name__ == '__main__':
